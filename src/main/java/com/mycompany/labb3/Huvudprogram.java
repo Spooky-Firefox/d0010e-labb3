@@ -12,7 +12,7 @@ public class Huvudprogram {
 	public static void main(String[] args) {
 
 		ArrayList<Rum> rum = new ArrayList<Rum>();
-
+                System.out.println("kalle");
 		// Dessa rum och gångar morsvarar de i laborationsinstruktionen.
 
 		// TODO Skapa även andra uppsättningar rum/gångar för att kunna testköra
