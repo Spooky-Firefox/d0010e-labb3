@@ -1,4 +1,4 @@
-package labb3;
+package com.mycompany.labb3;
 
 import static labb3.modell.Väderstreck.*;
 
