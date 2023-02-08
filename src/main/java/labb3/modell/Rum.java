@@ -24,6 +24,14 @@ public class Rum {
         return this.pos.x();
     }
 
+    public int getXCentrum() {
+        return this.pos.x() + this.with / 2;
+    }
+
+    public int getYCentrum() {
+        return this.pos.y() + this.height / 2;
+    }
+
     public int getY() {
         return this.pos.y();
     }
@@ -65,4 +73,5 @@ public class Rum {
         från.exits[riktningUtUrFrån.index()] = path;
         till.exits[riktningInITill.index()] = path;
     }
+
 }
