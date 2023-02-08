@@ -1,4 +1,4 @@
-package com.mycompany.labb3;
+package labb3;
 
 import java.util.Observable;
 

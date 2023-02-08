@@ -1,4 +1,4 @@
-package com.mycompany.labb3;
+package labb3;
 
 import static labb3.modell.Väderstreck.*;
 
@@ -12,6 +12,8 @@ public class Huvudprogram {
 	public static void main(String[] args) {
 
 		ArrayList<Rum> rum = new ArrayList<Rum>();
+                System.out.println("kalle");
+                System.out.println("ionoinadewadad");
 		// Dessa rum och gångar morsvarar de i laborationsinstruktionen.
 
 		// TODO Skapa även andra uppsättningar rum/gångar för att kunna testköra
