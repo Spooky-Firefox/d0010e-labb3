@@ -13,6 +13,8 @@ import labb3.modell.Nivå;
 import labb3.modell.Rum;
 import labb3.modell.Väderstreck;
 
+import static labb3.GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK;
+import static labb3.GlobalaKonstanter.VÄGGTJOCKLEK;
 import static labb3.verktyg.Grafik.drawThickLine;
 
 import labb3.verktyg.Punkt;
@@ -62,38 +64,37 @@ public class Målarduk extends JPanel {
     }
 
     private void ritaRum(Graphics g, Rum ettRum) {
-        g.setColor(ettRum.getFloorColor());
         int x1 = ettRum.getX();
         int y1 = ettRum.getY();
-        g.fillRect(x1, y1, ettRum.getWith(), ettRum.getHeight());
         g.setColor(GlobalaKonstanter.VÄGGFÄRG);
         g.fillRect(x1, y1, ettRum.getWith(), ettRum.getHeight());
+        g.setColor(ettRum.getFloorColor());
+        g.fillRect(x1 + VÄGGTJOCKLEK, y1 + VÄGGTJOCKLEK, ettRum.getWith() - DUBBEL_VÄGGTJOCKLEK, ettRum.getHeight() - DUBBEL_VÄGGTJOCKLEK);
     }
 
     private void ritaGångarFrånRum(Graphics g, Rum ettRum) {
-        g.setColor(Color.PINK);
-//g.setColor(GlobalaKonstanter.VÄGGFÄRG);
+        Color c = ettRum.getFloorColor();
         if (ettRum.finnsUtgångÅt(Väderstreck.VÄSTER)) {
             Punkt startPunkt = new Punkt(ettRum.getX(), ettRum.getYCentrum());
-            Punkt slutPunkt = new Punkt(startPunkt.x() + GlobalaKonstanter.VÄGGTJOCKLEK, startPunkt.y());
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt slutPunkt = new Punkt(startPunkt.x() + VÄGGTJOCKLEK, startPunkt.y());
+            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
         }
         if (ettRum.finnsUtgångÅt(Väderstreck.NORR)) {
             Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY());
-            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() + GlobalaKonstanter.VÄGGTJOCKLEK);
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() + VÄGGTJOCKLEK);
+            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
         }
 
         if (ettRum.finnsUtgångÅt(Väderstreck.SÖDER)) {
-            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY()+ettRum.getHeight());
-            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() - GlobalaKonstanter.VÄGGTJOCKLEK);
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY() + ettRum.getHeight());
+            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() - VÄGGTJOCKLEK);
+            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
         }
 
         if (ettRum.finnsUtgångÅt(Väderstreck.ÖSTER)) {
             Punkt startPunkt = new Punkt(ettRum.getX() + ettRum.getWith(), ettRum.getYCentrum());
-            Punkt slutPunkt = new Punkt(startPunkt.x() - GlobalaKonstanter.VÄGGTJOCKLEK, startPunkt.y());
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt slutPunkt = new Punkt(startPunkt.x() - VÄGGTJOCKLEK, startPunkt.y());
+            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
         }
     }
 
@@ -130,7 +131,7 @@ public class Målarduk extends JPanel {
             default -> {
             }
         }
-        drawThickLine(g, aPunkt, bPunkt, GlobalaKonstanter.VÄGGTJOCKLEK, Color.red);
+        drawThickLine(g, aPunkt, bPunkt, VÄGGTJOCKLEK, Color.red);
     }
 
     private void ritaMarkörFörVarAnvändarenÄr(Graphics g) {
