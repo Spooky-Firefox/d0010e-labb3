@@ -1,7 +1,7 @@
 package labb3.modell;
 
 public enum Väderstreck {
-	NORR, ÖSTER, SÖDER, VÄSTER;
+	NORR, ÖSTER, SÖDER, VÄSTER;     
 	// TODO: Lägg till en konstruktor som tar ett heltal och sparar det i 
 	// en dold heltalsvariabel (en instansvariabel). Skriv en instansmetod
 	// index() som returnerar heltalsvariabeln. Ändra de fyra väderstrecken 

@@ -20,9 +20,9 @@ public class Tangentbordslyssnare implements KeyListener {
         switch (c) {
             case 'w' -> enNivå.hoppaÅt(Väderstreck.NORR);
             case 'a' -> enNivå.hoppaÅt(Väderstreck.VÄSTER);
-
             case 's' -> enNivå.hoppaÅt(Väderstreck.SÖDER);
             case 'd' -> enNivå.hoppaÅt(Väderstreck.ÖSTER);
+            
         }
         System.out.println("keyPressed: " + c);
 

@@ -5,7 +5,7 @@ import java.awt.Color;
 public class Rum {
 
 	// TODO: Lägg till tillståndsvariabler.
-
+        
 	public Rum(Color golvfärg, int bredd, int höjd, int övX, int övY) {
 		// TODO: Kopiera parametrarna in i tillståndsvariablerna. (övX,övY) är
 		// koordinaten för rummets övre vänstra hörn och lagras lämpligen som en
@@ -31,7 +31,7 @@ public class Rum {
 
 	// TODO: Skrivklar metoden nedan som kopplar ihop två rum med en gång.
 
-	public static void kopplaIhop(Rum från, Väderstreck riktningUtUrFrån,
-			Rum till, Väderstreck riktningInITill) {
+	public static void kopplaIhop(Rum från, Väderstreck riktningUtUrFrån,Rum till, Väderstreck riktningInITill) {
+            
 	}
 }

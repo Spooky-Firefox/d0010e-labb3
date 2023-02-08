@@ -1,13 +1,15 @@
 package labb3;
 
 import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JFrame;
 
 import labb3.modell.Nivå;
 import labb3.vy.Målarduk;
 
 // TODO: Klassen ska ärva klassen JFrame i standardbibliotekets paket 
 // javax.swing och implementera gränssnittet Observer i paketet java.util. 
-public class GUI {
+public class GUI extends JFrame implements Observer{
 
 	private Målarduk målarduk;
 
