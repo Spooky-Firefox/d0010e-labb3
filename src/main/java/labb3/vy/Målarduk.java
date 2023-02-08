@@ -85,7 +85,7 @@ public class Målarduk extends JPanel {
         }
 
         if (ettRum.finnsUtgångÅt(Väderstreck.SÖDER)) {
-            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY());
+            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY()+ettRum.getHeight());
             Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() - GlobalaKonstanter.VÄGGTJOCKLEK);
             drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
         }
