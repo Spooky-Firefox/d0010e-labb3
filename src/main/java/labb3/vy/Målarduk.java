@@ -13,9 +13,9 @@ import labb3.modell.Nivå;
 import labb3.modell.Rum;
 import labb3.modell.Väderstreck;
 
-import static labb3.GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK;
-import static labb3.GlobalaKonstanter.VÄGGTJOCKLEK;
+import static labb3.GlobalaKonstanter.*;
 import static labb3.verktyg.Grafik.drawThickLine;
+import static labb3.verktyg.Grafik.fillCircle;
 
 import labb3.verktyg.Punkt;
 
@@ -73,28 +73,34 @@ public class Målarduk extends JPanel {
     }
 
     private void ritaGångarFrånRum(Graphics g, Rum ettRum) {
-        Color c = ettRum.getFloorColor();
+        ArrayList<Punkt> startPunkter = new ArrayList<Punkt>(4);
+        ArrayList<Punkt> slutPunkter = new ArrayList<Punkt>(4);
+
         if (ettRum.finnsUtgångÅt(Väderstreck.VÄSTER)) {
-            Punkt startPunkt = new Punkt(ettRum.getX(), ettRum.getYCentrum());
-            Punkt slutPunkt = new Punkt(startPunkt.x() + VÄGGTJOCKLEK, startPunkt.y());
-            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
+            Punkt startPunkt = new Punkt(ettRum.getX()+VÄGGTJOCKLEK, ettRum.getYCentrum());
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x() - HALV_VÄGGTJOCKLEK-VÄGGTJOCKLEK, startPunkt.y()));
         }
         if (ettRum.finnsUtgångÅt(Väderstreck.NORR)) {
-            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY());
-            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() + VÄGGTJOCKLEK);
-            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
+            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY()+VÄGGTJOCKLEK);
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x(), startPunkt.y() - VÄGGTJOCKLEK - HALV_VÄGGTJOCKLEK));
         }
 
         if (ettRum.finnsUtgångÅt(Väderstreck.SÖDER)) {
-            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY() + ettRum.getHeight());
-            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() - VÄGGTJOCKLEK);
-            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
+            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY() + ettRum.getHeight()-VÄGGTJOCKLEK);
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x(), startPunkt.y() + VÄGGTJOCKLEK+ HALV_VÄGGTJOCKLEK));
         }
 
         if (ettRum.finnsUtgångÅt(Väderstreck.ÖSTER)) {
-            Punkt startPunkt = new Punkt(ettRum.getX() + ettRum.getWith(), ettRum.getYCentrum());
-            Punkt slutPunkt = new Punkt(startPunkt.x() - VÄGGTJOCKLEK, startPunkt.y());
-            drawThickLine(g, startPunkt, slutPunkt, DUBBEL_VÄGGTJOCKLEK, c);
+            Punkt startPunkt = new Punkt(ettRum.getX() + ettRum.getWith() - VÄGGTJOCKLEK, ettRum.getYCentrum());
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x() + VÄGGTJOCKLEK + HALV_VÄGGTJOCKLEK, startPunkt.y()));
+        }
+        for (int i = 0; i < startPunkter.size(); i++) {
+            drawThickLine(g, startPunkter.get(i), slutPunkter.get(i), VÄGGTJOCKLEK, GÅNGFÄRG);
+            fillCircle(g,slutPunkter.get(i),HALV_VÄGGTJOCKLEK,GÅNGFÄRG);
         }
     }
 
@@ -116,18 +122,18 @@ public class Målarduk extends JPanel {
         Punkt aPunkt = new Punkt(0, 0);
         Punkt bPunkt = new Punkt(0, 0);
         if (null != aVäder) switch (aVäder) {
-            case NORR -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY());
-            case SÖDER -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY() + aRum.getHeight());
-            case VÄSTER -> aPunkt = new Punkt(aRum.getX(), aRum.getYCentrum());
-            case ÖSTER -> aPunkt = new Punkt(aRum.getX() + aRum.getWith(), aRum.getYCentrum());
+            case NORR -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY()-VÄGGTJOCKLEK);
+            case SÖDER -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY() + aRum.getHeight()+VÄGGTJOCKLEK);
+            case VÄSTER -> aPunkt = new Punkt(aRum.getX()-VÄGGTJOCKLEK, aRum.getYCentrum());
+            case ÖSTER -> aPunkt = new Punkt(aRum.getX() + aRum.getWith()+VÄGGTJOCKLEK, aRum.getYCentrum());
             default -> {
             }
         }
         if (null != bVäder) switch (bVäder) {
-            case NORR -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY());
-            case SÖDER -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY() + bRum.getHeight());
-            case VÄSTER -> bPunkt = new Punkt(bRum.getX(), aRum.getYCentrum());
-            case ÖSTER -> bPunkt = new Punkt(bRum.getX() + bRum.getWith(), bRum.getYCentrum());
+            case NORR -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY()-VÄGGTJOCKLEK);
+            case SÖDER -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY() + bRum.getHeight()+VÄGGTJOCKLEK);
+            case VÄSTER -> bPunkt = new Punkt(bRum.getX()-VÄGGTJOCKLEK, aRum.getYCentrum());
+            case ÖSTER -> bPunkt = new Punkt(bRum.getX() + bRum.getWith()+VÄGGTJOCKLEK, bRum.getYCentrum());
             default -> {
             }
         }
