@@ -3,7 +3,7 @@ package labb3;
 import java.awt.Color;
 
 /**
- * @author Håkan Jonsson
+ * @author Viktor Magnusson & Olle Ronstad
  */
 abstract public class GlobalaKonstanter {
 
