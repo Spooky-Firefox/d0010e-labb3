@@ -47,7 +47,7 @@ public class GUI extends JFrame implements Observer {
         // Annars går det också att dra till med en storlek och sen bara
         // använda rum som säkert kan visas på målarduken.
 
-        this.addKeyListener(new Tangentbordslyssnare(enNivå));
+        målarduk.addKeyListener(new Tangentbordslyssnare(enNivå));
         // Lägg till en KeyListener på målardiken, dvs en instans av
         // typen Tangentbordslyssnare. Notera att lyssnaren vill ha enNivå
         // som argument till konstruktorn för att kunna påverka just den
