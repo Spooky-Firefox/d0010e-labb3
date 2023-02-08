@@ -5,13 +5,16 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+
 import labb3.GlobalaKonstanter;
 
 import labb3.modell.Gång;
 import labb3.modell.Nivå;
 import labb3.modell.Rum;
 import labb3.modell.Väderstreck;
+
 import static labb3.verktyg.Grafik.drawThickLine;
+
 import labb3.verktyg.Punkt;
 
 // TODO: Ändra nästa rad så att en Målarduk "är-en" JPanel. 
@@ -40,7 +43,9 @@ public class Målarduk extends JPanel {
         }
         for (Rum rum : rumen) {
             for (Gång gång : rum.getGångar()) {
-                ritaGång(g, gång);
+                if (gång != null) {
+                    ritaGång(g, gång);
+                }
             }
         }
 
@@ -112,16 +117,16 @@ public class Målarduk extends JPanel {
         if (null != aVäder) switch (aVäder) {
             case NORR -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY());
             case SÖDER -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY() + aRum.getHeight());
-            case VÄSTER -> aPunkt = new Punkt(aRum.getX(),aRum.getYCentrum());
-            case ÖSTER -> aPunkt = new Punkt(aRum.getX()+aRum.getWith(),aRum.getYCentrum());
+            case VÄSTER -> aPunkt = new Punkt(aRum.getX(), aRum.getYCentrum());
+            case ÖSTER -> aPunkt = new Punkt(aRum.getX() + aRum.getWith(), aRum.getYCentrum());
             default -> {
             }
         }
         if (null != bVäder) switch (bVäder) {
             case NORR -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY());
             case SÖDER -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY() + bRum.getHeight());
-            case VÄSTER -> bPunkt = new Punkt(bRum.getX(),aRum.getYCentrum());
-            case ÖSTER -> bPunkt = new Punkt(bRum.getX()+bRum.getWith(),bRum.getYCentrum());
+            case VÄSTER -> bPunkt = new Punkt(bRum.getX(), aRum.getYCentrum());
+            case ÖSTER -> bPunkt = new Punkt(bRum.getX() + bRum.getWith(), bRum.getYCentrum());
             default -> {
             }
         }
