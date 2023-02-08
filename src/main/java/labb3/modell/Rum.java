@@ -1,37 +1,68 @@
 package labb3.modell;
 
+import labb3.verktyg.Punkt;
+
 import java.awt.Color;
+
+import static labb3.GlobalaKonstanter.ANTAL_VÄDERSTRECK;
 
 public class Rum {
 
-	// TODO: Lägg till tillståndsvariabler.
+    private final Punkt pos;
+    private final Gång[] exits = new Gång[ANTAL_VÄDERSTRECK];
+    private final int with, height;
+    private final Color floorColor;
 
-	public Rum(Color golvfärg, int bredd, int höjd, int övX, int övY) {
-		// TODO: Kopiera parametrarna in i tillståndsvariablerna. (övX,övY) är
-		// koordinaten för rummets övre vänstra hörn och lagras lämpligen som en
-		// instans av klassen Punkt i paketet labb3.verktyg.
-	}
+    public Rum(Color golvfärg, int bredd, int höjd, int övX, int övY) {
+        pos = new Punkt(övX, övY);
+        with = bredd;
+        height = höjd;
+        floorColor = golvfärg;
+    }
 
-	// TODO: Skriv "getters", metoder som returnerar tillståndsvariablernas
-	// värden.
+    public int getX() {
+        return this.pos.x();
+    }
 
-	// TODO: Skriv instansmetoden
-	//
-	// finnsUtgångÅt(Väderstreck väderstreck)
-	//
-	// som ska kontrollera om det från ett rum finns en utgång åt visst
-	// väderstreck.
+    public int getY() {
+        return this.pos.y();
+    }
 
-	// TODO: Skriv instansmetoden
-	//
-	// Gång gångenÅt(Väderstreck väderstreck) som
-	//
-	// returnerar den gång som leder från ett rum i riktning väderstreck. Om
-	// sådan gång saknas ska ett undantag kastas med lämpligt felmeddelande.
+    public int getWith() {
+        return this.with;
+    }
 
-	// TODO: Skrivklar metoden nedan som kopplar ihop två rum med en gång.
+    public int getHeight() {
+        return this.height;
+    }
 
-	public static void kopplaIhop(Rum från, Väderstreck riktningUtUrFrån,
-			Rum till, Väderstreck riktningInITill) {
-	}
+    public Color getFloorColor() {
+        return floorColor;
+    }
+
+    // finnsUtgångÅt(Väderstreck väderstreck)
+    //
+    // som ska kontrollera om det från ett rum finns en utgång åt visst
+    // väderstreck.
+    public boolean finnsUtgångÅt(Väderstreck väderstreck) {
+        return this.exits[väderstreck.index()] != null;
+    }
+
+    // Gång gångenÅt(Väderstreck väderstreck) som
+    //
+    // returnerar den gång som leder från ett rum i riktning väderstreck. Om
+    // sådan gång saknas ska ett undantag kastas med lämpligt felmeddelande.
+    public Gång gångÅt(Väderstreck väderstreck) {
+        if (this.exits[väderstreck.index()] == null) {
+            throw new IllegalArgumentException("en fång åt väderstrecket existerar inte, använd finnsUtgång först");
+        }
+        return this.exits[väderstreck.index()];
+    }
+
+    public static void kopplaIhop(Rum från, Väderstreck riktningUtUrFrån,
+                                  Rum till, Väderstreck riktningInITill) {
+        Gång path = new Gång(från, riktningUtUrFrån, till, riktningInITill);
+        från.exits[riktningUtUrFrån.index()] = path;
+        till.exits[riktningInITill.index()] = path;
+    }
 }
