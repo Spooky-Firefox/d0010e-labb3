@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import static labb3.verktyg.Grafik.*;
 
 /**
- * @author Håkan Jonsson
+ * @author Viktor Magnusson & Olle Ronstad
  */
 public class GrafikDemo extends JFrame {
 

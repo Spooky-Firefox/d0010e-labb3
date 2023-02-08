@@ -1,13 +1,15 @@
 package labb3;
 
 import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JFrame;
 
 import labb3.modell.Nivå;
 import labb3.vy.Målarduk;
 
 // TODO: Klassen ska ärva klassen JFrame i standardbibliotekets paket 
 // javax.swing och implementera gränssnittet Observer i paketet java.util. 
-public class GUI {
+public class GUI extends JFrame implements Observer{
 
 	private Målarduk målarduk;
 
@@ -41,6 +43,7 @@ public class GUI {
 	// TODO: Metoden update ska vara den i gränssnittet Observer. Lägg därför
 	// till @Override på raden innan metodhuvudet. (Klassen måste sen importera
 	// java.util.Observer.)
+        @Override
 	public void update(Observable o, Object arg) {
 		// Detta anrop triggar ett anrop till paintComponent i Målarduk.
 		// Avkommentera raden (när Målarduk "är-en" JPanel). 
