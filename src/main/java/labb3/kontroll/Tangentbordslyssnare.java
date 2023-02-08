@@ -8,7 +8,7 @@ import labb3.modell.Väderstreck;
 
 public class Tangentbordslyssnare implements KeyListener {
 
-    private Nivå enNivå;
+    private final Nivå enNivå;
 
     public Tangentbordslyssnare(Nivå enNivå) {
         this.enNivå = enNivå;
