@@ -20,9 +20,13 @@ public class Nivå extends Observable {
                 if (i != j) {
                     int x_dist = i.getX() - j.getX();
                     int y_dist = i.getY() - j.getY();
-                    if (Math.abs(x_dist) < i.getWith() / 2 + j.getWith() / 2) {
-                        throw new Error("rum överlappar");
-                    } else if (y_dist < i.getHeight() / 2 + j.getHeight() / 2) {
+                    if (Math.abs(x_dist) < i.getWith() / 2 + j.getWith() / 2 &&
+                            Math.abs(y_dist) < i.getHeight() / 2 + j.getHeight() / 2) {
+                        System.err.println("rum överlappar");
+                        System.err.println(String.format("i.x %d, j.x %d, i.with %d, j.with %d",
+                                i.getX(),j.getX(),i.getWith(), j.getWith()));
+                        System.err.println(String.format("i.y %d, j.y %d, i.height %d, j.height %d",
+                                i.getY(),j.getY(),i.getHeight(), j.getHeight()));
                         throw new Error("rum överlappar");
                     }
                 }
