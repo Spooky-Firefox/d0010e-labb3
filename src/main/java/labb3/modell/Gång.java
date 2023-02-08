@@ -5,11 +5,13 @@ public class Gång {
     private Rum från;
     private Rum till;
     private Väderstreck riktningUtUrFrån;
+    private Väderstreck riktningInITill;
 
     public Gång(Rum från, Väderstreck riktningUtUrFrån, Rum till,Väderstreck riktningInITill) {
         this.från = från;
         this.till = till;
         this.riktningUtUrFrån = riktningUtUrFrån;
+        this.riktningInITill = riktningInITill;
     }
 
     public Rum getFrån() {
@@ -23,6 +25,8 @@ public class Gång {
     public Väderstreck getRiktningUtUrFrån() {
         return riktningUtUrFrån;
     }
+
+    public Väderstreck getRiktningInITill() { return riktningInITill; }
 
     public Rum frånRum(Rum rum){
         if (this.från == rum) {
