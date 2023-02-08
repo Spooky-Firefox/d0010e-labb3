@@ -122,22 +122,22 @@ public class Målarduk extends JPanel {
         Punkt aPunkt = new Punkt(0, 0);
         Punkt bPunkt = new Punkt(0, 0);
         if (null != aVäder) switch (aVäder) {
-            case NORR -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY()-VÄGGTJOCKLEK);
-            case SÖDER -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY() + aRum.getHeight()+VÄGGTJOCKLEK);
-            case VÄSTER -> aPunkt = new Punkt(aRum.getX()-VÄGGTJOCKLEK, aRum.getYCentrum());
-            case ÖSTER -> aPunkt = new Punkt(aRum.getX() + aRum.getWith()+VÄGGTJOCKLEK, aRum.getYCentrum());
+            case NORR -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY()-HALV_VÄGGTJOCKLEK);
+            case SÖDER -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY() + aRum.getHeight()+HALV_VÄGGTJOCKLEK);
+            case VÄSTER -> aPunkt = new Punkt(aRum.getX()-HALV_VÄGGTJOCKLEK, aRum.getYCentrum());
+            case ÖSTER -> aPunkt = new Punkt(aRum.getX() + aRum.getWith()+HALV_VÄGGTJOCKLEK, aRum.getYCentrum());
             default -> {
             }
         }
         if (null != bVäder) switch (bVäder) {
-            case NORR -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY()-VÄGGTJOCKLEK);
-            case SÖDER -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY() + bRum.getHeight()+VÄGGTJOCKLEK);
-            case VÄSTER -> bPunkt = new Punkt(bRum.getX()-VÄGGTJOCKLEK, aRum.getYCentrum());
-            case ÖSTER -> bPunkt = new Punkt(bRum.getX() + bRum.getWith()+VÄGGTJOCKLEK, bRum.getYCentrum());
+            case NORR -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY()-HALV_VÄGGTJOCKLEK);
+            case SÖDER -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY() + bRum.getHeight()+HALV_VÄGGTJOCKLEK);
+            case VÄSTER -> bPunkt = new Punkt(bRum.getX()-HALV_VÄGGTJOCKLEK, aRum.getYCentrum());
+            case ÖSTER -> bPunkt = new Punkt(bRum.getX() + bRum.getWith()+HALV_VÄGGTJOCKLEK, bRum.getYCentrum());
             default -> {
             }
         }
-        drawThickLine(g, aPunkt, bPunkt, VÄGGTJOCKLEK, Color.red);
+        drawThickLine(g, aPunkt, bPunkt, VÄGGTJOCKLEK, GÅNGFÄRG);
     }
 
     private void ritaMarkörFörVarAnvändarenÄr(Graphics g) {
