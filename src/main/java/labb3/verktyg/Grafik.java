@@ -5,9 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-/**
- * @author Viktor Magnusson & Olle Ronstad
- */
+
 public class Grafik {
 
     public static void drawThickLine(Graphics g, Punkt start, Punkt slut, int width, Color c) {

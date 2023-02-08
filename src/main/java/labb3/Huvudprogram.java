@@ -12,10 +12,8 @@ public class Huvudprogram {
 	public static void main(String[] args) {
 
 		ArrayList<Rum> rum = new ArrayList<Rum>();
-                System.out.println("kalle");
-                System.out.println("ionoinadewadad");
 		// Dessa rum och gångar morsvarar de i laborationsinstruktionen.
-
+                
 		// TODO Skapa även andra uppsättningar rum/gångar för att kunna testköra
 		// ordentligt. Lägg varje uppsättning (även den givna nedan) i separata
 		// metoder här i klassen. Såna bör vara deklarerade static för att kunna

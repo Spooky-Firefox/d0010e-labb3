@@ -8,9 +8,6 @@ import javax.swing.JPanel;
 
 import static labb3.verktyg.Grafik.*;
 
-/**
- * @author Viktor Magnusson & Olle Ronstad
- */
 public class GrafikDemo extends JFrame {
 
 	private class Yta extends JPanel {

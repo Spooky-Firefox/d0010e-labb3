@@ -1,10 +1,6 @@
 package labb3.verktyg;
 
-/**
- * Icke muterbar klass för punkter.
- * 
- * @author Viktor Magnusson & Olle Ronstad
- */
+
 public class Punkt {
 
 	private final int x, y;

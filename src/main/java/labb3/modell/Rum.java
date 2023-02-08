@@ -3,6 +3,8 @@ package labb3.modell;
 import labb3.verktyg.Punkt;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static labb3.GlobalaKonstanter.ANTAL_VÄDERSTRECK;
 
@@ -43,7 +45,7 @@ public class Rum {
     public int getHeight() {
         return this.height;
     }
-
+    
     public Color getFloorColor() {
         return floorColor;
     }
@@ -72,6 +74,12 @@ public class Rum {
         Gång path = new Gång(från, riktningUtUrFrån, till, riktningInITill);
         från.exits[riktningUtUrFrån.index()] = path;
         till.exits[riktningInITill.index()] = path;
+    }
+
+    public Iterable<Gång> getGångar() {
+        ArrayList<Gång> gångar = new ArrayList<Gång>();
+        gångar.addAll(Arrays.asList(exits));
+        return gångar;
     }
 
 }
