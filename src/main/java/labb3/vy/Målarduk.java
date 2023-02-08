@@ -1,8 +1,6 @@
 package labb3.vy;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -34,8 +32,10 @@ public class Målarduk extends JPanel {
     }
 
     // TODO: Lätt till @Override på metoden nedan.
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    protected void paintComponent(Graphics tmp_g) {
+        super.paintComponent(tmp_g);
+        Graphics2D g = (Graphics2D) tmp_g;
+
         ArrayList<Rum> rumen = enNivå.getAllRums();
         for (Rum rum : rumen) {
             ritaRum(g, rum);
@@ -63,7 +63,7 @@ public class Målarduk extends JPanel {
         // labb3.labb3.verktyg.Grafik. Anropa hjälpmetoderna från paintComponent.
     }
 
-    private void ritaRum(Graphics g, Rum ettRum) {
+    private void ritaRum(Graphics2D g, Rum ettRum) {
         int x1 = ettRum.getX();
         int y1 = ettRum.getY();
         g.setColor(GlobalaKonstanter.VÄGGFÄRG);
@@ -72,7 +72,7 @@ public class Målarduk extends JPanel {
         g.fillRect(x1 + VÄGGTJOCKLEK, y1 + VÄGGTJOCKLEK, ettRum.getWith() - DUBBEL_VÄGGTJOCKLEK, ettRum.getHeight() - DUBBEL_VÄGGTJOCKLEK);
     }
 
-    private void ritaGångarFrånRum(Graphics g, Rum ettRum) {
+    private void ritaGångarFrånRum(Graphics2D g, Rum ettRum) {
         ArrayList<Punkt> startPunkter = new ArrayList<Punkt>(4);
         ArrayList<Punkt> slutPunkter = new ArrayList<Punkt>(4);
 
@@ -100,8 +100,13 @@ public class Målarduk extends JPanel {
         }
         for (int i = 0; i < startPunkter.size(); i++) {
             drawThickLine(g, startPunkter.get(i), slutPunkter.get(i), VÄGGTJOCKLEK, GÅNGFÄRG);
+        }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        for (int i = 0; i < startPunkter.size(); i++) {
             fillCircle(g,slutPunkter.get(i),HALV_VÄGGTJOCKLEK,GÅNGFÄRG);
         }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
+
     }
 
     private Punkt baspunkt(Rum ettRum, Väderstreck enRiktning) {
@@ -114,7 +119,7 @@ public class Målarduk extends JPanel {
         /* endast här för att Eclipse inte ska klaga */
     }
 
-    private void ritaGång(Graphics g, Gång gång) {
+    private void ritaGång(Graphics2D g, Gång gång) {
         Rum aRum = gång.getTill();
         Rum bRum = gång.getFrån();
         Väderstreck aVäder = gång.getRiktningInITill();
@@ -137,11 +142,15 @@ public class Målarduk extends JPanel {
             default -> {
             }
         }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         drawThickLine(g, aPunkt, bPunkt, VÄGGTJOCKLEK, GÅNGFÄRG);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
     }
 
-    private void ritaMarkörFörVarAnvändarenÄr(Graphics g) {
+    private void ritaMarkörFörVarAnvändarenÄr(Graphics2D g) {
         Punkt punkt = new Punkt(enNivå.getCurentRum().getXCentrum(), enNivå.getCurentRum().getYCentrum());
-        g.fillOval(punkt.x(), punkt.y(), GlobalaKonstanter.ANVÄNDARRADIE, GlobalaKonstanter.ANVÄNDARRADIE);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        fillCircle(g,punkt,ANVÄNDARRADIE,Color.RED);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
     }
 }
