@@ -23,4 +23,12 @@ public class Gång {
     public Väderstreck getRiktningUtUrFrån() {
         return riktningUtUrFrån;
     }
+
+    public Rum frånRum(Rum rum){
+        if (this.från == rum) {
+            return this.till;
+        } else {
+            return this.från;
+        }
+    }
 }
