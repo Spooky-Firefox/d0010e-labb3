@@ -47,13 +47,7 @@ public class Nivå extends Observable {
         // angränsande rum efter att användaren tryckt på en tangent.)
         if (this.nuvarandeRum.finnsUtgångÅt(väderstreck)) {
             Gång path = this.nuvarandeRum.gångÅt(väderstreck);
-            Rum nextRum;
-            if (path.getFrån() == this.nuvarandeRum) {
-                nextRum = path.getTill();
-            } else {
-                nextRum = path.getFrån();
-            }
-            this.nuvarandeRum = nextRum;
+            this.nuvarandeRum = path.frånRum(this.nuvarandeRum);
         }
     }
 }
