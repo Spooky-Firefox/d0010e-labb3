@@ -43,6 +43,7 @@ public class GUI extends JFrame implements Observer{
 	// TODO: Metoden update ska vara den i gränssnittet Observer. Lägg därför
 	// till @Override på raden innan metodhuvudet. (Klassen måste sen importera
 	// java.util.Observer.)
+        @Override
 	public void update(Observable o, Object arg) {
 		// Detta anrop triggar ett anrop till paintComponent i Målarduk.
 		// Avkommentera raden (när Målarduk "är-en" JPanel). 

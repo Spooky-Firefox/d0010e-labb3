@@ -3,7 +3,7 @@ package labb3.verktyg;
 /**
  * Icke muterbar klass för punkter.
  * 
- * @author Håkan Jonsson
+ * @author Viktor Magnusson & Olle Ronstad
  */
 public class Punkt {
 

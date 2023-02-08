@@ -6,15 +6,16 @@ import labb3.vy.Målarduk;
 // TODO: Gör så att klassen Nivå ärver Observable i paketet java.util. 
 public class Nivå {
 
-    private Rum startrum;
+    private Rum startRum;
     private ArrayList<Rum> rum;
+    private Rum nuvarandeRum;
     // TODO: Lägg till tillståndsvariabler för att hålla reda på nivåns rum och
     // i vilket rum som användaren "är".
 
-    public Nivå(Rum startrum, ArrayList<Rum> rum) {
-        this.startrum = startrum;
+    public Nivå(Rum startRum, ArrayList<Rum> rum) {
+        this.startRum = startRum;
         this.rum = rum;
-        if (!rum.contains(startrum)) {
+        if (!rum.contains(startRum)) {
             throw new Error("Arraylis rum does not contain startrum");
         }
         for (Rum r : rum) {
