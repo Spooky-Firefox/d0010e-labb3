@@ -38,8 +38,8 @@ public class GUI extends JFrame implements Observer {
                 maxY = rum.getY()+rum.getWith();
             }
         }
-        maxX = maxX+20;
-        maxY = maxY+20;
+        maxX = maxX+30;
+        maxY = maxY+30;
         setPreferredSize(new Dimension(maxX, maxY));
         // Använd setPreferredSize på målarduk och sätt dess dimensioner
         // så alla rum faktiskt syns. Ett tips är att loopa igenom nivåns alla
