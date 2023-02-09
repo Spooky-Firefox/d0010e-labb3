@@ -149,6 +149,10 @@ public class Målarduk extends JPanel {
 
     private void ritaMarkörFörVarAnvändarenÄr(Graphics2D g) {
         Punkt punkt = new Punkt(enNivå.getCurentRum().getXCentrum(), enNivå.getCurentRum().getYCentrum());
+        Color c = Color.RED;
+        if(enNivå.getCurentRum().getFloorColor() == Color.RED){
+            c = Color.black;
+        }
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         fillCircle(g,punkt,ANVÄNDARRADIE,ANVÄNDARFÄRG);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
