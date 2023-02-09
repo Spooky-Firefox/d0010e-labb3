@@ -53,5 +53,7 @@ public class Nivå extends Observable {
             Gång path = this.nuvarandeRum.gångÅt(väderstreck);
             this.nuvarandeRum = path.frånRum(this.nuvarandeRum);
         }
+        this.setChanged();
+        this.notifyObservers();
     }
 }

@@ -1,8 +1,6 @@
 package labb3.vy;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -13,7 +11,9 @@ import labb3.modell.Nivå;
 import labb3.modell.Rum;
 import labb3.modell.Väderstreck;
 
+import static labb3.GlobalaKonstanter.*;
 import static labb3.verktyg.Grafik.drawThickLine;
+import static labb3.verktyg.Grafik.fillCircle;
 
 import labb3.verktyg.Punkt;
 
@@ -32,8 +32,10 @@ public class Målarduk extends JPanel {
     }
 
     // TODO: Lätt till @Override på metoden nedan.
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    protected void paintComponent(Graphics tmp_g) {
+        super.paintComponent(tmp_g);
+        Graphics2D g = (Graphics2D) tmp_g;
+
         ArrayList<Rum> rumen = enNivå.getAllRums();
         for (Rum rum : rumen) {
             ritaRum(g, rum);
@@ -61,40 +63,50 @@ public class Målarduk extends JPanel {
         // labb3.labb3.verktyg.Grafik. Anropa hjälpmetoderna från paintComponent.
     }
 
-    private void ritaRum(Graphics g, Rum ettRum) {
-        g.setColor(ettRum.getFloorColor());
+    private void ritaRum(Graphics2D g, Rum ettRum) {
         int x1 = ettRum.getX();
         int y1 = ettRum.getY();
-        g.fillRect(x1, y1, ettRum.getWith(), ettRum.getHeight());
         g.setColor(GlobalaKonstanter.VÄGGFÄRG);
         g.fillRect(x1, y1, ettRum.getWith(), ettRum.getHeight());
+        g.setColor(ettRum.getFloorColor());
+        g.fillRect(x1 + VÄGGTJOCKLEK, y1 + VÄGGTJOCKLEK, ettRum.getWith() - DUBBEL_VÄGGTJOCKLEK, ettRum.getHeight() - DUBBEL_VÄGGTJOCKLEK);
     }
 
-    private void ritaGångarFrånRum(Graphics g, Rum ettRum) {
-        g.setColor(Color.PINK);
-//g.setColor(GlobalaKonstanter.VÄGGFÄRG);
+    private void ritaGångarFrånRum(Graphics2D g, Rum ettRum) {
+        ArrayList<Punkt> startPunkter = new ArrayList<Punkt>(4);
+        ArrayList<Punkt> slutPunkter = new ArrayList<Punkt>(4);
+
         if (ettRum.finnsUtgångÅt(Väderstreck.VÄSTER)) {
-            Punkt startPunkt = new Punkt(ettRum.getX(), ettRum.getYCentrum());
-            Punkt slutPunkt = new Punkt(startPunkt.x() + GlobalaKonstanter.VÄGGTJOCKLEK, startPunkt.y());
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt startPunkt = new Punkt(ettRum.getX()+VÄGGTJOCKLEK, ettRum.getYCentrum());
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x() - HALV_VÄGGTJOCKLEK-VÄGGTJOCKLEK, startPunkt.y()));
         }
         if (ettRum.finnsUtgångÅt(Väderstreck.NORR)) {
-            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY());
-            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() + GlobalaKonstanter.VÄGGTJOCKLEK);
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY()+VÄGGTJOCKLEK);
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x(), startPunkt.y() - VÄGGTJOCKLEK - HALV_VÄGGTJOCKLEK));
         }
 
         if (ettRum.finnsUtgångÅt(Väderstreck.SÖDER)) {
-            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY());
-            Punkt slutPunkt = new Punkt(startPunkt.x(), startPunkt.y() - GlobalaKonstanter.VÄGGTJOCKLEK);
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt startPunkt = new Punkt(ettRum.getXCentrum(), ettRum.getY() + ettRum.getHeight()-VÄGGTJOCKLEK);
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x(), startPunkt.y() + VÄGGTJOCKLEK+ HALV_VÄGGTJOCKLEK));
         }
 
         if (ettRum.finnsUtgångÅt(Väderstreck.ÖSTER)) {
-            Punkt startPunkt = new Punkt(ettRum.getX() + ettRum.getWith(), ettRum.getYCentrum());
-            Punkt slutPunkt = new Punkt(startPunkt.x() - GlobalaKonstanter.VÄGGTJOCKLEK, startPunkt.y());
-            drawThickLine(g, startPunkt, slutPunkt, GlobalaKonstanter.DUBBEL_VÄGGTJOCKLEK, Color.PINK);
+            Punkt startPunkt = new Punkt(ettRum.getX() + ettRum.getWith() - VÄGGTJOCKLEK, ettRum.getYCentrum());
+            startPunkter.add(startPunkt);
+            slutPunkter.add( new Punkt(startPunkt.x() + VÄGGTJOCKLEK + HALV_VÄGGTJOCKLEK, startPunkt.y()));
         }
+        for (int i = 0; i < startPunkter.size(); i++) {
+            drawThickLine(g, startPunkter.get(i), slutPunkter.get(i), VÄGGTJOCKLEK, GÅNGFÄRG);
+        }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        for (int i = 0; i < startPunkter.size(); i++) {
+            fillCircle(g,slutPunkter.get(i),HALV_VÄGGTJOCKLEK,GÅNGFÄRG);
+        }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
+
     }
 
     private Punkt baspunkt(Rum ettRum, Väderstreck enRiktning) {
@@ -107,7 +119,7 @@ public class Målarduk extends JPanel {
         /* endast här för att Eclipse inte ska klaga */
     }
 
-    private void ritaGång(Graphics g, Gång gång) {
+    private void ritaGång(Graphics2D g, Gång gång) {
         Rum aRum = gång.getTill();
         Rum bRum = gång.getFrån();
         Väderstreck aVäder = gång.getRiktningInITill();
@@ -115,26 +127,30 @@ public class Målarduk extends JPanel {
         Punkt aPunkt = new Punkt(0, 0);
         Punkt bPunkt = new Punkt(0, 0);
         if (null != aVäder) switch (aVäder) {
-            case NORR -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY());
-            case SÖDER -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY() + aRum.getHeight());
-            case VÄSTER -> aPunkt = new Punkt(aRum.getX(), aRum.getYCentrum());
-            case ÖSTER -> aPunkt = new Punkt(aRum.getX() + aRum.getWith(), aRum.getYCentrum());
+            case NORR -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY()-HALV_VÄGGTJOCKLEK);
+            case SÖDER -> aPunkt = new Punkt(aRum.getXCentrum(), aRum.getY() + aRum.getHeight()+HALV_VÄGGTJOCKLEK);
+            case VÄSTER -> aPunkt = new Punkt(aRum.getX()-HALV_VÄGGTJOCKLEK, aRum.getYCentrum());
+            case ÖSTER -> aPunkt = new Punkt(aRum.getX() + aRum.getWith()+HALV_VÄGGTJOCKLEK, aRum.getYCentrum());
             default -> {
             }
         }
         if (null != bVäder) switch (bVäder) {
-            case NORR -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY());
-            case SÖDER -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY() + bRum.getHeight());
-            case VÄSTER -> bPunkt = new Punkt(bRum.getX(), aRum.getYCentrum());
-            case ÖSTER -> bPunkt = new Punkt(bRum.getX() + bRum.getWith(), bRum.getYCentrum());
+            case NORR -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY()-HALV_VÄGGTJOCKLEK);
+            case SÖDER -> bPunkt = new Punkt(bRum.getXCentrum(), bRum.getY() + bRum.getHeight()+HALV_VÄGGTJOCKLEK);
+            case VÄSTER -> bPunkt = new Punkt(bRum.getX()-HALV_VÄGGTJOCKLEK, aRum.getYCentrum());
+            case ÖSTER -> bPunkt = new Punkt(bRum.getX() + bRum.getWith()+HALV_VÄGGTJOCKLEK, bRum.getYCentrum());
             default -> {
             }
         }
-        drawThickLine(g, aPunkt, bPunkt, GlobalaKonstanter.VÄGGTJOCKLEK, Color.red);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        drawThickLine(g, aPunkt, bPunkt, VÄGGTJOCKLEK, GÅNGFÄRG);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
     }
 
-    private void ritaMarkörFörVarAnvändarenÄr(Graphics g) {
+    private void ritaMarkörFörVarAnvändarenÄr(Graphics2D g) {
         Punkt punkt = new Punkt(enNivå.getCurentRum().getXCentrum(), enNivå.getCurentRum().getYCentrum());
-        g.fillOval(punkt.x(), punkt.y(), GlobalaKonstanter.ANVÄNDARRADIE, GlobalaKonstanter.ANVÄNDARRADIE);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        fillCircle(g,punkt,ANVÄNDARRADIE,Color.RED);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_OFF);
     }
 }
