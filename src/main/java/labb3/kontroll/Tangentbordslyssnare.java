@@ -24,7 +24,7 @@ public class Tangentbordslyssnare implements KeyListener {
             case 'd' -> enNivå.hoppaÅt(Väderstreck.ÖSTER);         
         }
         System.out.println("keyPressed: " + c);
-
+        
     }
 
     @Override
