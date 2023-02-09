@@ -1,5 +1,8 @@
 package labb3.modell;
-
+/**
+ * 
+ * @author Viktor Magnusson & Olle Ronstad
+ */
 public class Gång {
 
     private Rum från;

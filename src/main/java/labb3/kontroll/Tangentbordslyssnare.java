@@ -5,7 +5,10 @@ import java.awt.event.KeyListener;
 
 import labb3.modell.Nivå;
 import labb3.modell.Väderstreck;
-
+/**
+ * 
+ * @author Viktor Magnusson & Olle Ronstad
+ */
 public class Tangentbordslyssnare implements KeyListener {
 
     private final Nivå enNivå;

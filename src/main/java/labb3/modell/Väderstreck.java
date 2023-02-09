@@ -1,5 +1,8 @@
 package labb3.modell;
-
+/**
+ * 
+ * @author Viktor Magnusson & Olle Ronstad
+ */
 public enum Väderstreck {
 	NORR(0), ÖSTER(1), SÖDER(2), VÄSTER(3);
 	private final int ind;

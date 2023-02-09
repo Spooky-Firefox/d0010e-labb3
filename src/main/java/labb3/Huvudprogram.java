@@ -6,7 +6,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import labb3.modell.*;
-
+/**
+ * 
+ * @author Viktor Magnusson & Olle Ronstad
+ */
 public class Huvudprogram {
 	public static ArrayList<Rum> rum = new ArrayList<Rum>();
 	public static void testOverlapping(){

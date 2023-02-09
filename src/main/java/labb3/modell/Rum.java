@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static labb3.GlobalaKonstanter.ANTAL_VÄDERSTRECK;
-
+/**
+ * 
+ * @author Viktor Magnusson & Olle Ronstad
+ */
 public class Rum {
 
     private final Punkt pos;

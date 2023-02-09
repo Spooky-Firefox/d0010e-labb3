@@ -2,7 +2,10 @@ package labb3.modell;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
+/**
+ * 
+ * @author Viktor Magnusson & Olle Ronstad
+ */
 public class Nivå extends Observable {
     private ArrayList<Rum> rum;
     private Rum nuvarandeRum;

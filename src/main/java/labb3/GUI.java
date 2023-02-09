@@ -13,6 +13,10 @@ import labb3.vy.Målarduk;
 
 // TODO: Klassen ska ärva klassen JFrame i standardbibliotekets paket 
 // javax.swing och implementera gränssnittet Observer i paketet java.util. 
+/**
+ * 
+ * @author Viktor Magnusson & Olle Ronstad
+ */
 public class GUI extends JFrame implements Observer {
 
     private Målarduk målarduk;
